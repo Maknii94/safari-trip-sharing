@@ -9,6 +9,7 @@ package-lock.json
 
 # IDE files
 .vscode/
+.DS_Store
 
 # OS generated files
 
