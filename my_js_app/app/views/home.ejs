@@ -1,0 +1,40 @@
+<% title = 'Safari Trip App - Home' %>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-overlay">
+      <h1>Discover Your Next Adventure</h1>
+      <p>Explore the world's most exciting destinations with us.</p>
+      <p>Find new friends and share a Safari with us.</p>
+      <form class="search-bar">
+          <select class="styled-input" required>
+            <option value="" disabled selected>Choose Destination</option>
+            <option value="Arusha">Arusha</option>
+            <option value="Tarangire">Tarangire</option>
+            <option value="Serengeti">Serengeti</option>
+            <option value="Ngorongoro">Ngorongoro</option>
+            <option value="Manyara">Manyara</option>
+            <option value="Kilimanjaro">Kilimanjaro</option>
+            <option value="Natron">Natron</option>
+          </select>
+          
+          <input type="date" class="styled-input" required>
+          <select class="styled-input" required>
+            <option value="" disabled selected>Number of Adults</option>
+            <% for (let i = 1; i <= 7; i++) { %>
+              <option value="<%= i %>"><%= i %></option>
+            <% } %>
+          </select>
+          <!--input type="number" class="styled-input" placeholder="Adults" min="1" max="7" required-->
+          <button type="submit" class="btn">Search</button>
+      </form>
+      <!-- Extended Search Button -->
+      <div class="text-center mt-4">
+        <a href="/trips" class="btn btn-secondary">Extended Search</a>
+        <!--% if (user) { %-->
+        <a href="/trips/new" class="btn btn-primary ms-2">Offer Safari</a>
+        <!--% } %-->
+      </div>
+  </div>
+
+</section>

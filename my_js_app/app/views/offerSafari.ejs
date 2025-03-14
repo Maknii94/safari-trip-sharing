@@ -1,0 +1,96 @@
+<% title = 'Offer Safari Trip' %>
+<div class="container mt-5">
+  <h1>Offer Safari Trip</h1>
+  <form action="/trips" method="POST" id="offerSafariForm">
+    <!-- Date field -->
+    <div class="mb-3">
+      <label for="start_date" class="form-label">Date</label>
+      <input type="date" class="form-control" name="start_date" id="start_date" required>
+    </div>
+    <!-- Number of days -->
+    <div class="mb-3">
+      <label for="days" class="form-label">Number of Days</label>
+      <input type="number" class="form-control" name="days" id="days" min="1" required>
+    </div>
+    <!-- Car type selection -->
+    <div class="mb-3">
+      <label for="car_type" class="form-label">Car Type</label>
+      <select class="form-control" name="car_type" id="car_type" required>
+        <option value="" disabled selected>Select Car Type</option>
+        <option value="pop-up roof minivan">pop-up roof minivan</option>
+        <option value="pop-up roof 4x4 vehicle">pop-up roof 4x4 vehicle</option>
+        <option value="open-sided 4x4 vehicle">open-sided 4x4 vehicle</option>
+      </select>
+    </div>
+    <!-- Car state selection -->
+    <div class="mb-3">
+      <label for="car_state" class="form-label">Car State</label>
+      <select class="form-control" name="car_state" id="car_state" required>
+        <option value="" disabled selected>Select Car state</option>
+        <option value="slightly used">slightly used</option>
+        <option value="moderately used">moderately used</option>
+        <option value="heavily used">heavily used</option>
+      </select>
+    </div>
+    <!-- Itinerary: select destination and add to itinerary -->
+    <div class="mb-3">
+      <label for="destinationSelect" class="form-label">Add Destination</label>
+      <select class="form-control" id="destinationSelect">
+        <option value="" disabled selected>Select Destination</option>
+        <option value="Arusha">Arusha</option>
+        <option value="Tarangire">Tarangire</option>
+        <option value="Serengeti">Serengeti</option>
+        <option value="Ngorongoro">Ngorongoro</option>
+        <option value="Manyara">Manyara</option>
+        <option value="Kilimanjaro">Kilimanjaro</option>
+        <option value="Natron">Natron</option>
+      </select>
+      <button type="button" class="btn btn-secondary mt-2" id="addDestinationBtn">Add Destination</button>
+    </div>
+    <!-- Display the itinerary -->
+    <div class="mb-3">
+      <label class="form-label">Itinerary</label>
+      <ul id="itineraryList"></ul>
+    </div>
+    <!-- Hidden input to store itinerary as a JSON array string -->
+    <input type="hidden" name="itinerary" id="itineraryInput">
+    <!-- Free places -->
+    <div class="mb-3">
+      <label for="available_seats" class="form-label">Number of Free Places</label>
+      <input type="number" class="form-control" name="available_seats" id="available_seats" min="1" max="7" required>
+    </div>
+    <!-- Price per place -->
+    <div class="mb-3">
+      <label for="price_per_person" class="form-label">Price per Place</label>
+      <input type="number" class="form-control" name="price_per_person" id="price_per_person" min="10" max="1000" step="0.01" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Create Safari Trip</button>
+  </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const destinationSelect = document.getElementById('destinationSelect');
+  const addDestinationBtn = document.getElementById('addDestinationBtn');
+  const itineraryList = document.getElementById('itineraryList');
+  const itineraryInput = document.getElementById('itineraryInput');
+
+  addDestinationBtn.addEventListener('click', function() {
+    const selectedIndex = destinationSelect.selectedIndex;
+    const selectedOption = destinationSelect.options[selectedIndex];
+    if (selectedOption && selectedOption.value !== "") {
+      // Add the selected destination to the itinerary list
+      const li = document.createElement('li');
+      li.textContent = selectedOption.value;
+      itineraryList.appendChild(li);
+
+      // Remove the selected destination from the dropdown
+      destinationSelect.remove(selectedIndex);
+
+      // Update the hidden itinerary input with a JSON string representing an array of destinations
+      const destinations = Array.from(itineraryList.children).map(item => item.textContent);
+      itineraryInput.value = JSON.stringify(destinations);
+    }
+  });
+});
+</script>

@@ -1,0 +1,180 @@
+<% title = 'Safari Search' %>
+
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Extended Safari Search</h2>
+  <div class="row">
+    <!-- Left Column: Search Filters -->
+    <div class="col-md-4">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <h5 class="mb-0">Filter Your Safari</h5>
+        </div>
+        <div class="card-body">
+          <!--form id="filterForm" action="/extended-search" method="GET"-->
+          <form id="filterForm" action="/trips" method="GET">  
+            <!-- Destinations -->
+            <div class="mb-3">
+              <label for="destinations" class="form-label">Destinations</label>
+              <select id="destinations"
+                      name="destinations"
+                      class="form-select"
+                      multiple
+                      aria-label="Select one or multiple safari destinations"
+                      aria-description="Use Ctrl/Cmd key to select multiple destinations">
+                <option value="Arusha">Arusha</option>
+                <option value="Tarangire">Tarangire</option>
+                <option value="Serengeti">Serengeti</option>
+                <option value="Ngorongoro">Ngorongoro</option>
+                <option value="Manyara">Manyara</option>
+                <option value="Kilimanjaro">Kilimanjaro</option>
+                <option value="Natron">Natron</option>
+              </select>
+              <div class="form-text">Hold Ctrl (or Cmd on Mac) to select multiple.</div>
+            </div>
+
+            <!-- Start Date -->
+            <div class="mb-3">
+              <label for="startDate" class="form-label">Start Date</label>
+              <input type="date" id="startDate" name="start_date" class="form-control">
+            </div>
+
+            <!-- End Date -->
+            <div class="mb-3">
+              <label for="endDate" class="form-label">End Date</label>
+              <input type="date" id="endDate" name="end_date" class="form-control">
+            </div>
+
+            <!-- Days Range Slider -->
+            <div class="mb-3">
+              <label class="form-label">Days Range</label>
+              <div id="daysSlider"></div>
+              <div id="daysSliderValues" class="mt-1 small text-muted"></div>
+              <input type="hidden" name="min_days" id="min_days" value="<%= minDays %>">
+              <input type="hidden" name="max_days" id="max_days" value="<%= maxDays %>">
+            </div>
+
+            <!-- Price Range Slider -->
+            <div class="mb-3">
+              <label class="form-label">Price Range (per person)</label>
+              <div id="priceSlider"></div>
+              <div id="priceSliderValues" class="mt-1 small text-muted"></div>
+              <input type="hidden" name="min_price" id="min_price" value="<%= minPrice %>">
+              <input type="hidden" name="max_price" id="max_price" value="<%= maxPrice %>">
+            </div>
+
+            <!-- Car Type -->
+            <div class="mb-3">
+              <label for="luxuryLevel" class="form-label">Car Type</label>
+              <select id="luxuryLevel" name="car_type" class="form-select">
+                <option value="" disabled selected>Select Car Type</option>
+                <option value="pop-up roof minivan">pop-up roof minivan</option>
+                <option value="pop-up roof 4x4 vehicle">pop-up roof 4x4 vehicle</option>
+                <option value="open-sided 4x4 vehicle">open-sided 4x4 vehicle</option>
+              </select>
+            </div>
+
+            <!-- Car State -->
+            <div class="mb-3">
+              <label for="carState" class="form-label">Car State</label>
+              <select id="carState" name="car_state" class="form-select">
+                <option value="" disabled selected>Select Car State</option>
+                <option value="slightly used">Slightly Used</option>
+                <option value="moderately used">Moderately Used</option>
+                <option value="heavily used">Heavily Used</option>
+              </select>
+            </div>
+
+            <!-- Number of Adults -->
+            <div class="mb-3">
+              <label for="adults" class="form-label">Number of Adults</label>
+              <select id="adults" name="adults" class="form-select" required>
+                <option value="" disabled selected>Select Number of Adults</option>
+                <% for (let i = 1; i <= 7; i++) { %>
+                  <option value="<%= i %>"><%= i %></option>
+                <% } %>
+              </select>
+            </div>
+
+            <div class="d-grid">
+              <button type="button" id="clearFilters" class="btn btn-secondary">Clear Filters</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Search Results -->
+    <div class="col-md-8">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <h5 class="mb-0">Search Results</h5>
+        </div>
+        <div class="card-body" id="resultsContainer">
+          <% if (safariTrips && safariTrips.length > 0) { %>
+            <div class="row">
+              <% safariTrips.forEach(function(trip) { %>
+                <div class="col-md-6">
+                  <div class="card mb-4">
+                    <img src="/images/<%= trip.image %>" class="card-img-top" alt="<%= trip.title %>">
+                    <div class="card-body">
+                      <h6 class="card-title"><%= trip.title %></h6>
+                      <p class="card-text">Destinations: <%= trip.itinerary.join(', ') %></p>
+                      <p class="card-text">Start Date: <%= trip.start_date %></p>
+                      <p class="card-text">Days: <%= trip.days %></p>
+                      <p class="card-text">Car Type: <%= trip.car_type %></p>
+                      <p class="card-text">Car State: <%= trip.car_state %></p>
+                      <p class="card-text">Price per Person: $<%= trip.price_per_person %></p>
+                    </div>
+                  </div>
+                </div>
+              <% }); %>
+            </div>
+          <% } else { %>
+            <p class="text-center">No trips found matching your criteria.</p>
+          <% } %>
+        </div>
+      </div>
+  </div>
+  </div>
+</div>
+
+<script type="module">
+  import { SafariSearch } from '/js/safari-search.js';
+  import { SliderConfig } from '/js/slider-config.js';
+  import { initBooking } from '/js/booking.js';
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const search = new SafariSearch();
+    
+    SliderConfig.createSlider('daysSlider', {
+      minInputId: 'min_days',
+      maxInputId: 'max_days',
+      onUpdate: (values) => {
+        document.getElementById('daysSliderValues').innerText = `Min: ${values[0]} - Max: ${values[1]}`;
+        search.debouncedFetch();
+      }
+    });
+
+    SliderConfig.createSlider('priceSlider', {
+      minInputId: 'min_price',
+      maxInputId: 'max_price',
+      onUpdate: (values) => {
+        document.getElementById('priceSliderValues').innerText = `Min: $${values[0]} - Max: $${values[1]}`;
+        search.debouncedFetch();
+      }
+    });
+  });
+
+  initBooking(); 
+  
+</script>
+
+<% if (successMessage) { %>
+  <script>
+    alert("<%= successMessage %>");
+  </script>
+<% } else if (errorMessage) { %>
+  <script>
+    alert("Error: <%= errorMessage %>");
+  </script>
+<% } %>

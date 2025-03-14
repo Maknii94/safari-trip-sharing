@@ -1,0 +1,189 @@
+[
+  {
+    "id": "1",
+    "title": "Wild Safari Adventure",
+    "start_date": "2025-04-01",
+    "itinerary": [
+      "Serengeti",
+      "Ngorongoro"
+    ],
+    "days": 2,
+    "car_type": "pop-up roof minivan",
+    "car_state": "slightly used",
+    "price_per_person": 50,
+    "available_seats": 3,
+    "image": "safari1.jpg",
+    "offered_by": "Random User",
+    "bookings": [
+      {
+        "booking_user": "omar",
+        "seats_to_book": 2,
+        "total_cost": 200,
+        "bookedAt": "2025-03-13T19:42:39.347Z"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "title": "Discover Tarangire, Manyara, Ngorongoro",
+    "start_date": "2025-04-05",
+    "itinerary": [
+      "Tarangire",
+      "Manyara",
+      "Ngorongoro"
+    ],
+    "days": 3,
+    "car_type": "pop-up roof 4x4 vehicle",
+    "car_state": "moderately used",
+    "price_per_person": 30,
+    "available_seats": 4,
+    "image": "safari2.jpg",
+    "offered_by": "Random User",
+    "bookings": [
+      {
+        "bookingUser": "omar",
+        "totalCost": null,
+        "bookedAt": "2025-03-13T18:47:19.314Z"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "title": "Ahla Abdennaceur",
+    "start_date": "2025-04-10",
+    "itinerary": [
+      "Serengeti",
+      "Manyara",
+      "Kilimanjaro"
+    ],
+    "days": 3,
+    "car_type": "open-sided 4x4 vehicle",
+    "car_state": "heavily used",
+    "price_per_person": 80,
+    "available_seats": 1,
+    "image": "safari3.jpg"
+  },
+  {
+    "id": "4",
+    "title": "Should we always have a title?",
+    "start_date": "2025-04-15",
+    "itinerary": [
+      "Ngorongoro",
+      "Serengeti"
+    ],
+    "days": 2,
+    "car_type": "pop-up roof minivan",
+    "car_state": "moderately used",
+    "price_per_person": 50,
+    "available_seats": 3,
+    "image": "safari4.jpg",
+    "offered_by": "Random User",
+    "bookings": [
+      {
+        "bookingUser": "omar",
+        "totalCost": null,
+        "bookedAt": "2025-03-13T19:25:18.228Z"
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "title": "This is expensive",
+    "start_date": "2025-04-20",
+    "itinerary": [
+      "Tarangire",
+      "Manyara",
+      "Ngorongoro",
+      "Serengeti"
+    ],
+    "days": 4,
+    "car_type": "pop-up roof 4x4 vehicle",
+    "car_state": "heavily used",
+    "price_per_person": 72,
+    "available_seats": 2,
+    "image": "safari5.jpg"
+  },
+  {
+    "id": "6",
+    "title": "Ka3bech l Kilimanjaro",
+    "start_date": "2025-04-25",
+    "itinerary": [
+      "Kilimanjaro",
+      "Natron"
+    ],
+    "days": 2,
+    "car_type": "open-sided 4x4 vehicle",
+    "car_state": "slightly used",
+    "price_per_person": 44,
+    "available_seats": 1,
+    "image": "safari6.jpg",
+    "offered_by": "Random User",
+    "bookings": [
+      {
+        "bookingUser": "omar",
+        "totalCost": null,
+        "bookedAt": "2025-03-13T19:26:02.915Z"
+      }
+    ]
+  },
+  {
+    "id": "7",
+    "title": "Safari to the North",
+    "start_date": "2025-03-30",
+    "car_type": "pop-up roof 4x4 vehicle",
+    "itinerary": [
+      "Arusha",
+      "Tarangire",
+      "Serengeti",
+      "Ngorongoro"
+    ],
+    "car_state": "moderately used",
+    "days": 7,
+    "available_seats": 4,
+    "price_per_person": 54,
+    "image": "safari0.jpg",
+    "offered_by": "omar",
+    "created_at": "2025-03-10T16:01:40.462Z",
+    "bookings": []
+  },
+  {
+    "id": "5258edce-fab3-4eff-93f3-0f49e29c091d",
+    "title": "Safari Trip - TODO Add title field",
+    "start_date": "2025-03-20",
+    "days": 20,
+    "car_type": "pop-up roof minivan",
+    "car_state": "slightly used",
+    "itinerary": [
+      "Arusha",
+      "Tarangire",
+      "Serengeti",
+      "Ngorongoro"
+    ],
+    "available_seats": 2,
+    "price_per_person": 88,
+    "image": "safari0.jpg",
+    "offered_by": "omar",
+    "created_at": "2025-03-10T16:23:47.084Z",
+    "bookings": []
+  },
+  {
+    "id": "d9456cc1-a54b-437f-b2dd-e7a6b44b3b90",
+    "title": "Safari Trip - TODO Add title field",
+    "start_date": "2025-04-20",
+    "days": 10,
+    "car_type": "pop-up roof 4x4 vehicle",
+    "car_state": "slightly used",
+    "itinerary": [
+      "Arusha",
+      "Tarangire",
+      "Serengeti",
+      "Natron"
+    ],
+    "available_seats": 5,
+    "price_per_person": 70,
+    "image": "safari0.jpg",
+    "offered_by": "omar",
+    "created_at": "2025-03-10T18:12:09.024Z",
+    "bookings": []
+  }
+]

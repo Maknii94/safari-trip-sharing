@@ -1,0 +1,62 @@
+<% if (safariTrips && safariTrips.length > 0) { %>
+  <div class="row">
+    <% safariTrips.forEach(function(trip) { %>
+      <div class="col-md-6">
+        <div class="card mb-4">
+          <img src="/images/<%= trip.image %>" class="card-img-top" alt="<%= trip.title %>">
+          <div class="card-body">
+            <h6 class="card-title"><%= trip.title %></h6>
+            <p class="card-text">Destinations: <%= trip.itinerary.join(', ') %></p>
+            <p class="card-text">Start Date: <%= trip.start_date %></p>
+            <p class="card-text">Days: <%= trip.days %></p>
+            <p class="card-text">Car Type: <%= trip.car_type %></p>
+            <p class="card-text">Car State: <%= trip.car_state %></p>
+            <p class="card-text">Price per Person: $<%= trip.price_per_person %></p>
+            <p class="card-text">Available seats: <%= trip.available_seats %></p>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookingModal-<%= trip.id %>" <% if (trip.available_seats < 1) { %> disabled <% } %> >
+              Book Seats
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Booking Modal -->
+      <div class="modal fade" id="bookingModal-<%= trip.id %>" tabindex="-1" aria-labelledby="bookingModalLabel-<%= trip.id %>" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form action="/trips/<%= trip.id %>/book" method="POST">
+              <div class="modal-header">
+                <h5 class="modal-title" id="bookingModalLabel-<%= trip.id %>">Book Seats for <%= trip.title %></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Select number of seats:</p>
+                <div class="d-flex align-items-center mb-3">
+                  <button type="button" class="btn btn-secondary seat-minus" 
+                    data-trip-id="<%= trip.id %>"
+                    data-days="<%= trip.days %>"
+                    data-available-seats="<%= trip.available_seats %>" 
+                    data-price-per-person="<%= trip.price_per_person %>">-</button>
+                  <span class="mx-3 seat-count" id="seatCount-<%= trip.id %>">1</span>
+                  <button type="button" class="btn btn-secondary seat-plus" 
+                    data-trip-id="<%= trip.id %>"
+                    data-days="<%= trip.days %>"
+                    data-available-seats="<%= trip.available_seats %>" 
+                    data-price-per-person="<%= trip.price_per_person %>">+</button>
+                </div>
+                <input type="hidden" name="seats" class="seats-input" id="seatsInput-<%= trip.id %>" value="1">
+                <p>Total Price: $<span class="computed-price" id="computedPrice-<%= trip.id %>"></span></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Confirm Booking</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+<% } else { %>
+  <p class="text-center">No trips found matching your criteria.</p>
+<% } %>
