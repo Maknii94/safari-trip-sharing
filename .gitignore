@@ -27,4 +27,4 @@ tmp/
 temp/
 
 # Debug files
-.debug/
+.debug/*/.DS_Store
