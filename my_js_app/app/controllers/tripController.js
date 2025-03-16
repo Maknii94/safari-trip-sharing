@@ -7,23 +7,24 @@ const { loadSafariTrips, saveSafariTrips } = require('../services/dataService');
 exports.offerTrip = (req, res) => {
   try {
     const tripData = {
-      start_date: req.body.tripDate,
-      car_type: req.body.carType,
+      start_date: req.body.start_date,
+      car_type: req.body.car_type,
       car_state: req.body.car_state,
       itinerary: JSON.parse(req.body.itinerary), // parse JSON string to array
-      available_seats: parseInt(req.body.freePlaces, 10),
-      price_per_person: parseFloat(req.body.pricePerPlace),
+      available_seats: parseInt(req.body.available_seats, 10),
+      price_per_person: parseFloat(req.body.price_per_person),
       days: parseInt(req.body.days, 10)
     };
 
     const user = authService.getUserDetails(req);
     if (!user) {
-      return res.status(401).json({ error: 'Unauthorized' });
+      req.session.errorMessage = 'Unauthorized';
+      return res.redirect('/login');
     }
-    const offeredBy = user.preferred_username;
+    const offered_by = user.preferred_username;
 
-    const newTrip = tripService.offerTrip(tripData, offeredBy);
-    // Load current trips, add the new trip, and save the updated trips.
+    const newTrip = tripService.offerTrip(tripData, offered_by);
+
     const trips = loadSafariTrips();
     trips.push(newTrip);
     saveSafariTrips(trips);
@@ -95,10 +96,13 @@ exports.getTrips = (req, res) => {
       return tripRank <= selectedRank;
     });
   }
+
   const user = authService.getUserDetails(req);
   if (!user) {
-    return res.status(401).json({ error: 'Unauthorized' });
+    req.session.errorMessage = 'Unauthorized';
+    return res.redirect('/login');
   }
+
   const successMessage = req.session.successMessage;
   const errorMessage = req.session.errorMessage;
   req.session.successMessage = null;

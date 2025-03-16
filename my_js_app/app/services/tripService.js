@@ -36,14 +36,14 @@ function validateTripOffer(tripData) {
   }
 }
 
-function offerTrip(rideData, offeredBy) {
+function offerTrip(rideData, offered_by) {
   console.log('rideData:', rideData);
   validateTripOffer(rideData);
 
   const id = uuidv4();
   const image = "safari0.jpg";
   const title = "Safari Trip - TODO Add title field";
-  const newTrip = new Trip({ id, offeredBy, image, title, ...rideData });
+  const newTrip = new Trip({ id, offered_by, image, title, ...rideData });
 
   trips.push(newTrip);
   return newTrip;

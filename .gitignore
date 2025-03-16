@@ -27,4 +27,8 @@ tmp/
 temp/
 
 # Debug files
-.debug/*/.DS_Store
+.debug/
+**/.DS_Store
+
+my_js_app/realm/
+realm_config.json
